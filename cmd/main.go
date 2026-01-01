@@ -35,8 +35,8 @@ import (
 	metricsserver "sigs.k8s.io/controller-runtime/pkg/metrics/server"
 	"sigs.k8s.io/controller-runtime/pkg/webhook"
 
-	batchv1 "test.com/test/api/v1"
-	"test.com/test/internal/controller"
+	batchv1 "test.com/test/api/batch/v1"
+	"test.com/test/internal/controller/batch"
 	// +kubebuilder:scaffold:imports
 )
 
@@ -178,7 +178,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	if err = (&controller.CronJobReconciler{
+	if err = (&batch.CronJobReconciler{
 		Client: mgr.GetClient(),
 		Scheme: mgr.GetScheme(),
 	}).SetupWithManager(mgr); err != nil {
